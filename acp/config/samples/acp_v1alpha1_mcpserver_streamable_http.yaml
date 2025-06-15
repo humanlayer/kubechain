@@ -1,0 +1,12 @@
+apiVersion: acp.humanlayer.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: example-streamable-http-server
+  namespace: default
+spec:
+  transport: streamable-http
+  url: "https://api.example.com/mcp/streamable"
+  sessionId: "session-12345"
+  headers:
+    Authorization: "Bearer your-api-key-here"
+    Content-Type: "application/json"

@@ -1,0 +1,11 @@
+apiVersion: acp.humanlayer.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: example-sse-server
+  namespace: default
+spec:
+  transport: sse
+  url: "https://api.example.com/mcp/sse"
+  headers:
+    Authorization: "Bearer your-api-key-here"
+    X-Custom-Header: "custom-value"

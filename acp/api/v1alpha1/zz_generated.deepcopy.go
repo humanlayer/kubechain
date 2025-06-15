@@ -590,6 +590,13 @@ func (in *MCPServerSpec) DeepCopyInto(out *MCPServerSpec) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Headers != nil {
+		in, out := &in.Headers, &out.Headers
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	in.Resources.DeepCopyInto(&out.Resources)
 	if in.ApprovalContactChannel != nil {
 		in, out := &in.ApprovalContactChannel, &out.ApprovalContactChannel

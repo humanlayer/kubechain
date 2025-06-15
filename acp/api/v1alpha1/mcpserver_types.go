@@ -9,7 +9,7 @@ import (
 // MCPServerSpec defines the desired state of MCPServer
 type MCPServerSpec struct {
 	// Transport specifies the transport type for the MCP server
-	// +kubebuilder:validation:Enum=stdio;http
+	// +kubebuilder:validation:Enum=stdio;http;sse;streamable-http
 	// +kubebuilder:validation:Required
 	Transport string `json:"transport"`
 
@@ -25,9 +25,18 @@ type MCPServerSpec struct {
 	// +optional
 	Env []EnvVar `json:"env,omitempty"`
 
-	// URL is the endpoint for HTTP MCP servers
+	// URL is the endpoint for HTTP/SSE/streamable-http MCP servers
 	// +optional
 	URL string `json:"url,omitempty"`
+
+	// Headers for authentication with remote MCP servers (SSE/streamable-http)
+	// Values can reference secrets using secretKeyRef
+	// +optional
+	Headers map[string]string `json:"headers,omitempty"`
+
+	// SessionID for streamable-http transport resumption
+	// +optional
+	SessionID string `json:"sessionId,omitempty"`
 
 	// ResourceRequirements defines CPU/Memory resources requests/limits
 	// +optional
