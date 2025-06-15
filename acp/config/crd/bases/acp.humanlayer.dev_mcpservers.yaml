@@ -104,6 +104,13 @@ spec:
                   - name
                   type: object
                 type: array
+              headers:
+                additionalProperties:
+                  type: string
+                description: |-
+                  Headers for authentication with remote MCP servers (SSE/streamable-http)
+                  Values can reference secrets using secretKeyRef
+                type: object
               resources:
                 description: ResourceRequirements defines CPU/Memory resources requests/limits
                 properties:
@@ -128,14 +135,20 @@ spec:
                       resources required
                     type: object
                 type: object
+              sessionId:
+                description: SessionID for streamable-http transport resumption
+                type: string
               transport:
                 description: Transport specifies the transport type for the MCP server
                 enum:
                 - stdio
                 - http
+                - sse
+                - streamable-http
                 type: string
               url:
-                description: URL is the endpoint for HTTP MCP servers
+                description: URL is the endpoint for HTTP/SSE/streamable-http MCP
+                  servers
                 type: string
             required:
             - transport
